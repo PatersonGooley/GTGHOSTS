@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gorilla Tag Ghost Encounters</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    main {
+      padding: 1rem;
+    }
+    .encounter-form {
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .encounter-list {
+      background: white;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .encounter-item {
+      border-bottom: 1px solid #ddd;
+      padding: 0.5rem 0;
+    }
+    .encounter-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gorilla Tag Ghost Encounters</h1>
+    <p>Document and share your spooky encounters!</p>
+  </header>
+  <main>
+    <section class="encounter-form">
+      <h2>Submit an Encounter</h2>
+      <form id="encounterForm">
+        <label for="ghostName">Ghost Name:</label><br>
+        <input type="text" id="ghostName" name="ghostName" required><br><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" required></textarea><br><br>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+    <section class="encounter-list">
+      <h2>Documented Encounters</h2>
+      <div id="encounterList">
+        <p>No encounters documented yet.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.getElementById('encounterForm');
+    const encounterList = document.getElementById('encounterList');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const ghostName = document.getElementById('ghostName').value;
+      const description = document.getElementById('description').value;
+      const date = document.getElementById('date').value;
+
+      const encounterItem = document.createElement('div');
+      encounterItem.classList.add('encounter-item');
+      encounterItem.innerHTML = `
+        <h3>${ghostName}</h3>
+        <p>${description}</p>
+        <small>${date}</small>
+      `;
+
+      encounterList.appendChild(encounterItem);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
