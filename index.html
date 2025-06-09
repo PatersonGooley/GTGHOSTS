@@ -83,16 +83,33 @@
       const ghostName = document.getElementById('ghostName').value;
       const description = document.getElementById('description').value;
       const date = document.getElementById('date').value;
+      const imageInput = document.getElementById('image');
+      const imageFile = imageInput.files[0];
 
       const encounterItem = document.createElement('div');
       encounterItem.classList.add('encounter-item');
+
+      let imageHTML = '';
+      if (imageFile) {
+        const imageURL = URL.createObjectURL(imageFile);
+        imageHTML = `<img src="${imageURL}" alt="${ghostName}" style="max-width: 100%; height: auto; margin-top: 10px;">`;
+      }
+
       encounterItem.innerHTML = `
         <h3>${ghostName}</h3>
         <p>${description}</p>
         <small>${date}</small>
+        ${imageHTML}
       `;
 
       encounterList.appendChild(encounterItem);
+
+      // Revoke the object URL after the image is loaded to free memory
+      if (imageFile) {
+        const imgElement = encounterItem.querySelector('img');
+        imgElement.onload = () => URL.revokeObjectURL(imageURL);
+      }
+
       form.reset();
     });
   </script>
